@@ -13,6 +13,13 @@ const styles = {
   margin: 12,
   hiddenId: {
     display: 'none'
+  },
+  centerAlign: {
+    textAlign: 'center'
+  },
+  styleNumber: {
+    textAlign: 'center',
+    width: '50px'
   }
 };
 
@@ -36,7 +43,7 @@ const fieldUsername = ({input}) => (
 const fieldPassword = ({input}) => (
   <TextField
     floatingLabelText="Password"
-    type="text"
+    type="password"
     {...input}
     fullWidth={true}
   />
@@ -149,10 +156,11 @@ class PasswordListApp extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn tooltip="The ID">URL</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Name">Username</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Password</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Actions</TableHeaderColumn>
+              <TableHeaderColumn tooltip="No" style={styles.styleNumber}>No</TableHeaderColumn>
+              <TableHeaderColumn tooltip="URL" style={styles.centerAlign}>URL</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Username" style={styles.centerAlign}>Username</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Password" style={styles.centerAlign}>Password</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Actions" style={styles.centerAlign}>Actions</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -161,12 +169,13 @@ class PasswordListApp extends Component {
             displaySelectAll={false}
             displayRowCheckbox={false}
           >
-            {this.props.dataSite.sites.map( (sites) => (
+            {this.props.dataSite.sites.map((sites, index) => (
               <TableRow key={sites._id}>
-                <TableRowColumn>{sites.url}</TableRowColumn>
-                <TableRowColumn>{sites.username}</TableRowColumn>
-                <TableRowColumn>{sites.password}</TableRowColumn>
-                <TableRowColumn>
+                <TableRowColumn style={styles.styleNumber}>{index+1}</TableRowColumn>
+                <TableRowColumn style={styles.centerAlign}>{sites.url}</TableRowColumn>
+                <TableRowColumn style={styles.centerAlign}>{sites.username}</TableRowColumn>
+                <TableRowColumn style={styles.centerAlign}>{sites.password}</TableRowColumn>
+                <TableRowColumn style={styles.centerAlign}>
                   <FlatButton
                     onClick={this.handleOpen.bind(this, 'edit site', sites)}
                     secondary={true}
